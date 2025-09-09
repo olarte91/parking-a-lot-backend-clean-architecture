@@ -35,7 +35,7 @@ public class User {
   }
 
   public String getEmail() {
-    return password.getValue();
+    return email.getValue();
   }
 
   public void setEmail(String email) {

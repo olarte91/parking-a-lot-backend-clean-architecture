@@ -22,7 +22,7 @@ public class CreateUserUseCase {
       throw new UserAlreadyExistsException("The user with email: " + command.getEmail() + " already exists");
     }
 
-    User user =  new User(UUID.randomUUID(), command.getUsername(), command.getEmail(), command.getPassword());
+    User user =  new User(null, command.getUsername(), command.getEmail(), command.getPassword());
 
     return userRepository.createUser(user);
   }
