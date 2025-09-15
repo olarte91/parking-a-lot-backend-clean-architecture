@@ -22,9 +22,6 @@ public class Password {
     if(value == null || value.isEmpty()) {
       throw new InvalidPasswordException("The password cannot be null or empty");
     }
-    if(!value.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")){
-      throw new InvalidPasswordException("\"Password must contain at least one uppercase, lowercase, digit and special character (@$!%*?&). Minimum 8 characters\"\n");
-    }
   }
 
   @Override
