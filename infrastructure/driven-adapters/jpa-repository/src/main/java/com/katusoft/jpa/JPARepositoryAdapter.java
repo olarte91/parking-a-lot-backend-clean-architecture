@@ -7,6 +7,7 @@ import com.katusoft.model.user.gateways.UserRepository;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -33,6 +34,12 @@ public class JPARepositoryAdapter extends AdapterOperations<User, UserEntity, UU
   }
 
   @Override
+  public Optional<User> findUserByUsername(String username) {
+    return repository.findByUsername(username)
+        .map(entity -> mapper.map(entity, User.class));
+  }
+
+  @Override
   public boolean findUserById(UUID id) {
     return repository.findById(id).isPresent();
   }
@@ -43,7 +50,8 @@ public class JPARepositoryAdapter extends AdapterOperations<User, UserEntity, UU
         user.getId(),
         user.getUsername(),
         user.getEmail(),
-        user.getPassword()
+        user.getPassword(),
+        user.getRole()
     );
     UserEntity saved = repository.save(entity);
 
@@ -71,7 +79,8 @@ public class JPARepositoryAdapter extends AdapterOperations<User, UserEntity, UU
         user.getId(),
         user.getUsername(),
         user.getEmail(),
-        user.getPassword()
+        user.getPassword(),
+        user.getRole()
     );
   }
 }

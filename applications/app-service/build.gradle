@@ -11,6 +11,16 @@ dependencies {
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
     testImplementation 'com.tngtech.archunit:archunit:1.4.1'
     testImplementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    //Dotenv
+    implementation 'me.paulschwarz:spring-dotenv:4.0.0'
+
+
+    //Spring Security Dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
 }
 
 tasks.register('explodedJar', Copy) {

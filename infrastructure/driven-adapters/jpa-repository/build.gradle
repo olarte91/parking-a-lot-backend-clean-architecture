@@ -9,4 +9,13 @@ dependencies {
     // H2 solo para tests
     testRuntimeOnly 'com.h2database:h2'
     testImplementation 'org.reactivecommons.utils:object-mapper:0.1.0'
+
+    implementation 'org.springframework.security:spring-security-crypto'
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    //Dotenv
+    implementation 'me.paulschwarz:spring-dotenv:4.0.0'
 }

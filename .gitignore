@@ -334,3 +334,9 @@ gradle-app.setting
 # -----
 *.hprof
 build-cache
+
+#Archivos de configuración sensible
+.env
+.env.local
+.env.production
+.env.staging

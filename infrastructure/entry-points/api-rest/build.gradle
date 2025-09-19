@@ -5,13 +5,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'io.micrometer:micrometer-registry-prometheus'
-    //Spring Security Dependencies
-    implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     //Validation
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    //Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
 }
 
 

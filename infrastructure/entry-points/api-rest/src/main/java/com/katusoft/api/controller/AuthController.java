@@ -1,31 +1,37 @@
 package com.katusoft.api.controller;
 
+import com.katusoft.api.dto.AuthResponse;
 import com.katusoft.api.dto.CreateUserRequest;
+import com.katusoft.api.dto.LoginRequest;
 import com.katusoft.api.dto.UserResponse;
+import com.katusoft.model.authentication.gateways.PasswordService;
 import com.katusoft.model.user.User;
 import com.katusoft.usecase.createuser.CreateUserCommand;
 import com.katusoft.usecase.createuser.CreateUserUseCase;
+import com.katusoft.usecase.loginuser.LoginCommand;
+import com.katusoft.usecase.loginuser.LoginUserUseCase;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.time.LocalDateTime;
+
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
   private final CreateUserUseCase createUserUseCase;
-  private final PasswordEncoder passwordEncoder;
+  private final PasswordService passwordEncoder;
+  private final LoginUserUseCase loginUserUseCase;
 
-  public AuthController(CreateUserUseCase createUserUseCase, PasswordEncoder passwordEncoder) {
+  public AuthController(CreateUserUseCase createUserUseCase, PasswordService passwordEncoder, LoginUserUseCase loginUserUseCase) {
     this.createUserUseCase = createUserUseCase;
     this.passwordEncoder = passwordEncoder;
+    this.loginUserUseCase = loginUserUseCase;
   }
 
   @PostMapping("/register")
@@ -41,8 +47,18 @@ public class AuthController {
     return ResponseEntity.ok(new UserResponse(user));
   }
 
-//  @GetMapping("/users")
-//  public ResponseEntity<List<UserResponse>> getAllUsers() {
-//    return ResponseEntity.ok()
-//  }
+
+  @PostMapping("/login")
+  public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
+    LoginCommand command = new LoginCommand(request.getUsername(), request.getPassword());
+    String token = loginUserUseCase.execute(command);
+
+    AuthResponse response = new AuthResponse(
+        token,
+        request.getUsername(),
+        LocalDateTime.now().plusHours(24)
+    );
+
+    return ResponseEntity.ok(response);
+  }
 }

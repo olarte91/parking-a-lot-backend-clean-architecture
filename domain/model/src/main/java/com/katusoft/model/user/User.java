@@ -2,6 +2,7 @@ package com.katusoft.model.user;
 
 import com.katusoft.model.valueobjects.Email;
 import com.katusoft.model.valueobjects.Password;
+import com.katusoft.model.valueobjects.Role;
 import com.katusoft.model.valueobjects.Username;
 
 import java.util.Objects;
@@ -12,14 +13,26 @@ public class User {
   private Username username;
   private Email email;
   private Password password;
+  private Role role;
 
   public User (){}
 
+  //Constructor con role por defecto
   public User(UUID id, String username, String email, String password) {
     this.id = id;
     this.username = new Username(username);
     this.email = new Email(email);
     this.password = new Password(password);
+    this.role = Role.user();
+  }
+
+  //Constructor completo con role
+  public User(UUID id, String username, String email, String password, String role) {
+    this.id = id;
+    this.username = new Username(username);
+    this.email = new Email(email);
+    this.password = new Password(password);
+    this.role = new Role(role);
   }
 
   public UUID getId() {
@@ -48,6 +61,23 @@ public class User {
 
   public void setPassword(String password) {
     this.password = new Password(password);
+  }
+
+  public String getRole() {
+    return role.getValue();
+  }
+
+  public void setRole(String role) {
+    this.role = new Role(role);
+  }
+
+  //Métodos de conveniencia
+  public boolean isAdmin(){
+    return role.isAdmin();
+  }
+
+  public boolean isUser(){
+    return role.isUser();
   }
 
   @Override
