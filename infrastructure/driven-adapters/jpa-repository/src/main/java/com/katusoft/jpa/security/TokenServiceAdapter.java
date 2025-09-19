@@ -37,7 +37,7 @@ public class TokenServiceAdapter implements TokenService {
         .setClaims(claims)
         .setSubject(subject)
         .setIssuedAt(new Date(System.currentTimeMillis()))
-        .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration * 1000))
+        .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
         .signWith(getSigInKey(), SignatureAlgorithm.HS256)
         .compact();
   }
