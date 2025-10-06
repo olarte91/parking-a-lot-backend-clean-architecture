@@ -1,5 +1,6 @@
 package com.katusoft.usecase.createuser;
 
+import com.katusoft.model.authentication.gateways.PasswordService;
 import com.katusoft.model.exception.UserAlreadyExistsException;
 import com.katusoft.model.user.User;
 import com.katusoft.model.user.gateways.UserRepository;
@@ -9,9 +10,11 @@ import java.util.UUID;
 public class CreateUserUseCase {
 
   private final UserRepository userRepository;
+  private final PasswordService passwordEncoder;
 
-  public CreateUserUseCase(UserRepository userRepository) {
+  public CreateUserUseCase(UserRepository userRepository, PasswordService passwordEncoder) {
     this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   public User execute(CreateUserCommand command){
@@ -22,7 +25,8 @@ public class CreateUserUseCase {
       throw new UserAlreadyExistsException("The user with email: " + command.getEmail() + " already exists");
     }
 
-    User user =  new User(UUID.randomUUID(), command.getUsername(), command.getEmail(), command.getPassword());
+    String encodedPassword = passwordEncoder.encode(command.getPassword());
+    User user =  new User(UUID.randomUUID(), command.getUsername(), command.getEmail(), encodedPassword);
 
     return userRepository.createUser(user);
   }

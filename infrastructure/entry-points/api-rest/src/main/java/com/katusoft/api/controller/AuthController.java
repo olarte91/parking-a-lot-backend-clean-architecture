@@ -5,6 +5,7 @@ import com.katusoft.api.dto.CreateUserRequest;
 import com.katusoft.api.dto.LoginRequest;
 import com.katusoft.api.dto.UserResponse;
 import com.katusoft.model.authentication.gateways.PasswordService;
+import com.katusoft.model.authentication.gateways.TokenService;
 import com.katusoft.model.user.User;
 import com.katusoft.usecase.createuser.CreateUserCommand;
 import com.katusoft.usecase.createuser.CreateUserUseCase;
@@ -25,13 +26,13 @@ import java.time.LocalDateTime;
 public class AuthController {
 
   private final CreateUserUseCase createUserUseCase;
-  private final PasswordService passwordEncoder;
   private final LoginUserUseCase loginUserUseCase;
+  private final TokenService tokenService;
 
-  public AuthController(CreateUserUseCase createUserUseCase, PasswordService passwordEncoder, LoginUserUseCase loginUserUseCase) {
+  public AuthController(CreateUserUseCase createUserUseCase, PasswordService passwordEncoder, LoginUserUseCase loginUserUseCase, TokenService tokenService) {
     this.createUserUseCase = createUserUseCase;
-    this.passwordEncoder = passwordEncoder;
     this.loginUserUseCase = loginUserUseCase;
+    this.tokenService = tokenService;
   }
 
   @PostMapping("/register")
@@ -39,12 +40,14 @@ public class AuthController {
     CreateUserCommand command = new CreateUserCommand(
         request.getUsername(),
         request.getEmail(),
-        passwordEncoder.encode(request.getPassword())
+        request.getPassword()
     );
 
     User user = createUserUseCase.execute(command);
 
-    return ResponseEntity.ok(new UserResponse(user));
+    String token = tokenService.generateToken(user);
+
+    return ResponseEntity.ok(new UserResponse(user, token));
   }
 
 
