@@ -18,7 +18,7 @@ public interface FareRepository {
   boolean existsByType(FareType fareType);
 
   //Persistencia
-  Fare save(Fare fare);
+  Fare createFare(Fare fare);
 
   //Eliminación
   void deleteById(UUID id);

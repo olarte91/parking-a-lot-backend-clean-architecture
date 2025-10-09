@@ -25,6 +25,6 @@ public class CreateFareUseCase {
         command.getAmount()
     );
 
-    return fareRepository.save(newFare);
+    return fareRepository.createFare(newFare);
   }
 }

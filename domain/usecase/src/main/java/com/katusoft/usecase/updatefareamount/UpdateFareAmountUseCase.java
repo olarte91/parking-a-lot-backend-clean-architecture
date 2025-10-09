@@ -18,6 +18,6 @@ public class UpdateFareAmountUseCase {
 
     fare.setValuePerHour(updateFareAmountCommand.getAmount());
 
-    return fareRepository.save(fare);
+    return fareRepository.createFare(fare);
   }
 }

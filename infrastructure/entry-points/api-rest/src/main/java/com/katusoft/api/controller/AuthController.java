@@ -29,7 +29,7 @@ public class AuthController {
   private final LoginUserUseCase loginUserUseCase;
   private final TokenService tokenService;
 
-  public AuthController(CreateUserUseCase createUserUseCase, PasswordService passwordEncoder, LoginUserUseCase loginUserUseCase, TokenService tokenService) {
+  public AuthController(CreateUserUseCase createUserUseCase, LoginUserUseCase loginUserUseCase, TokenService tokenService) {
     this.createUserUseCase = createUserUseCase;
     this.loginUserUseCase = loginUserUseCase;
     this.tokenService = tokenService;

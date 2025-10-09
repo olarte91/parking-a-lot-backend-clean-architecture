@@ -11,10 +11,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public class JPARepositoryAdapter extends AdapterOperations<User, UserEntity, UUID, JPARepository>
+public class JpaUserRepositoryAdapter extends AdapterOperations<User, UserEntity, UUID, JpaUserRepository>
     implements UserRepository {
 
-  public JPARepositoryAdapter(JPARepository repository, ObjectMapper mapper) {
+  public JpaUserRepositoryAdapter(JpaUserRepository repository, ObjectMapper mapper) {
     /**
      *  Could be use mapper.mapBuilder if your domain model implement builder pattern
      *  super(repository, mapper, d -> mapper.mapBuilder(d,ObjectModel.ObjectModelBuilder.class).build());

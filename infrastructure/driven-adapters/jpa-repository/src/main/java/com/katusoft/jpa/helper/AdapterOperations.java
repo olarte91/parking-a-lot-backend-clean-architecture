@@ -1,5 +1,6 @@
 package com.katusoft.jpa.helper;
 
+import com.katusoft.model.fare.Fare;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.data.domain.Example;
 import org.springframework.data.repository.CrudRepository;
@@ -7,6 +8,7 @@ import org.springframework.data.repository.query.QueryByExampleExecutor;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import static java.util.stream.StreamSupport.stream;
@@ -56,9 +58,9 @@ public abstract class AdapterOperations<E, D, I, R extends CrudRepository<D, I> 
         return repository.saveAll(data);
     }
 
-    public E findById(I id) {
-        return toEntity(repository.findById(id).orElse(null));
-    }
+//    public Optional<Fare> findById(I id) {
+//        return toEntity(repository.findById(id).orElse(null));
+//    }
 
     public List<E> findByExample(E entity) {
         return toList(repository.findAll( Example.of(toData(entity))));
