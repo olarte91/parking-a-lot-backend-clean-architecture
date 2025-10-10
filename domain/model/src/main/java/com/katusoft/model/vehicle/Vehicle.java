@@ -22,11 +22,12 @@ public class Vehicle {
     return fareId;
   }
 
-  private static Vehicle create(String licensePlate, UUID fareId){
+  public static Vehicle create(String licensePlate, UUID fareId){
     validateInputs(licensePlate, fareId);
     return new Vehicle(new LicensePlate(licensePlate), fareId);
   }
 
+  //Validación invariante del modelo
   private static void validateInputs(String licensePlate, UUID fareId){
     if(licensePlate == null || licensePlate.isBlank()){
       throw new IllegalArgumentException("License plate cannot be null or blank");
