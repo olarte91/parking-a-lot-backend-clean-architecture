@@ -12,7 +12,7 @@ public class LicensePlate {
     if(value == null || value.isEmpty()) {
       throw new InvalidLicensePlateException("The value of the licenseplate is null or empty");
     }
-    if(value.matches("^[A-Za-z]{3}[0-9]{2}[0-9A-Za-z]$")){
+    if(!value.matches("^[A-Za-z]{3}[0-9]{2}[0-9A-Za-z]$")){
       throw new InvalidLicensePlateException("The value of the licenseplate is invalid");
     }
 
