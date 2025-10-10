@@ -23,10 +23,6 @@ public class Fare {
     return fareType;
   }
 
-  public void setFareType(FareType fareType) {
-    this.fareType = fareType;
-  }
-
   public double getValuePerHour() {
     return valuePerHour.getValue();
   }
