@@ -1,6 +1,6 @@
 package com.katusoft.api.dto;
 
-import com.katusoft.model.fare.FareType;
+import com.katusoft.model.fare.Type;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +11,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class FareRequest {
-  private FareType fareType;
+  private Type type;
   private double amount;
 }

@@ -1,19 +1,19 @@
 package com.katusoft.usecase.createfare;
 
-import com.katusoft.model.fare.FareType;
+import com.katusoft.model.fare.Type;
 
 public class CreateFareCommand {
 
-  private FareType fareType;
+  private Type type;
   private double amount;
 
-  public CreateFareCommand(FareType fareType, double amount) {
-    this.fareType = fareType;
+  public CreateFareCommand(Type type, double amount) {
+    this.type = type;
     this.amount = amount;
   }
 
-  public FareType getFareType() {
-    return fareType;
+  public Type getFareType() {
+    return type;
   }
 
   public double getAmount() {

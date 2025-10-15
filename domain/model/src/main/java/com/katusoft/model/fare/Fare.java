@@ -6,12 +6,12 @@ import java.util.UUID;
 
 public class Fare {
   private UUID id;
-  private FareType fareType;
+  private Type type;
   private ValuePerHour valuePerHour;
 
-  public Fare(UUID id, FareType fareType, double valuePerHour) {
+  public Fare(UUID id, Type type, double valuePerHour) {
     this.id = id;
-    this.fareType = fareType;
+    this.type = type;
     this.valuePerHour = new ValuePerHour(valuePerHour);
   }
 
@@ -19,8 +19,8 @@ public class Fare {
     return id;
   }
 
-  public FareType getFareType() {
-    return fareType;
+  public Type getFareType() {
+    return type;
   }
 
   public double getValuePerHour() {

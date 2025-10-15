@@ -1,6 +1,6 @@
 package com.katusoft.model.fare;
 
-public enum FareType {
+public enum Type {
   CARRO,
   MOTO
 }

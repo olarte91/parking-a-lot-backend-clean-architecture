@@ -3,7 +3,7 @@ package com.katusoft.jpa;
 import com.katusoft.jpa.entity.FareEntity;
 import com.katusoft.jpa.helper.AdapterOperations;
 import com.katusoft.model.fare.Fare;
-import com.katusoft.model.fare.FareType;
+import com.katusoft.model.fare.Type;
 import com.katusoft.model.fare.gateways.FareRepository;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -30,7 +30,7 @@ public class JpaFareRepositoryAdapter extends AdapterOperations<Fare, FareEntity
   }
 
   @Override
-  public Optional<Fare> findByType(FareType fareType) {
+  public Optional<Fare> findByType(Type type) {
     return Optional.empty();
   }
 
@@ -40,8 +40,8 @@ public class JpaFareRepositoryAdapter extends AdapterOperations<Fare, FareEntity
   }
 
   @Override
-  public boolean existsByType(FareType fareType) {
-    return repository.existsByFareType(fareType);
+  public boolean existsByType(Type type) {
+    return repository.existsByFareType(type);
   }
 
   @Override
@@ -60,7 +60,7 @@ public class JpaFareRepositoryAdapter extends AdapterOperations<Fare, FareEntity
     FareEntity entity = new FareEntity();
 
     entity.setId(fare.getId());
-    entity.setFareType(fare.getFareType());
+    entity.setType(fare.getFareType());
     entity.setValuePerHour(fare.getValuePerHour());
     return entity;
   }
@@ -68,7 +68,7 @@ public class JpaFareRepositoryAdapter extends AdapterOperations<Fare, FareEntity
   private Fare toDomain(FareEntity entity){
     return new Fare(
         entity.getId(),
-        entity.getFareType(),
+        entity.getType(),
         entity.getValuePerHour()
     );
   }

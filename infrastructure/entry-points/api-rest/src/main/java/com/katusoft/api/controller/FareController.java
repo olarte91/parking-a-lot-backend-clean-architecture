@@ -3,7 +3,6 @@ package com.katusoft.api.controller;
 import com.katusoft.api.dto.FareRequest;
 import com.katusoft.api.dto.FareResponse;
 import com.katusoft.model.fare.Fare;
-import com.katusoft.model.fare.gateways.FareRepository;
 import com.katusoft.usecase.createfare.CreateFareCommand;
 import com.katusoft.usecase.createfare.CreateFareUseCase;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +23,7 @@ public class FareController {
 
   @PostMapping("/create")
   public ResponseEntity<FareResponse> createFare(@RequestBody FareRequest request){
-    CreateFareCommand command = new CreateFareCommand(request.getFareType(), request.getAmount());
+    CreateFareCommand command = new CreateFareCommand(request.getType(), request.getAmount());
     Fare fare = createFareUseCase.execute(command);
 
     return ResponseEntity.ok(new FareResponse(fare));

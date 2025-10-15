@@ -1,7 +1,7 @@
 package com.katusoft.api.dto;
 
 import com.katusoft.model.fare.Fare;
-import com.katusoft.model.fare.FareType;
+import com.katusoft.model.fare.Type;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,11 +9,11 @@ import lombok.Setter;
 @Setter
 public class FareResponse {
 
-  public FareType fareType;
+  public Type type;
   public double fareAmount;
 
   public FareResponse(Fare fare) {
-    this.fareType = fare.getFareType();
+    this.type = fare.getFareType();
     this.fareAmount = fare.getValuePerHour();
   }
 }

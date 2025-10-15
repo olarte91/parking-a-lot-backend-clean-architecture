@@ -1,6 +1,6 @@
 package com.katusoft.jpa.entity;
 
-import com.katusoft.model.fare.FareType;
+import com.katusoft.model.fare.Type;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -28,7 +28,7 @@ public class FareEntity {
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false, unique = true, name = "fare_type")
-  private FareType fareType;
+  private Type type;
 
   @Column(name = "value_per_hour")
   private double valuePerHour;
