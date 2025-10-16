@@ -18,5 +18,6 @@ public interface ParkingSpaceRepository {
   long countByType(Type type);
   boolean existsById(UUID id);
   boolean existsByNumber(int number);
+  boolean isAvailable (int number);
 
 }
