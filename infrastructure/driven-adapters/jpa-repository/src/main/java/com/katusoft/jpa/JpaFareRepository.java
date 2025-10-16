@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface JpaFareRepository extends CrudRepository<FareEntity, UUID>, QueryByExampleExecutor<FareEntity> {
 
-  boolean existsByFareType(Type type);
+  boolean existsByType(Type type);
 }

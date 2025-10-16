@@ -33,6 +33,7 @@ public class SecurityConfig {
             .requestMatchers("/auth/**").permitAll()
             .requestMatchers("fare/**").permitAll()
             .requestMatchers("/vehicle/**").permitAll()
+            .requestMatchers("/parking-space/**").permitAll()
             .anyRequest().authenticated()
         )
         .sessionManagement(session ->

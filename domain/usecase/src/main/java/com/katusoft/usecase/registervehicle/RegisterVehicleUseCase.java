@@ -3,6 +3,7 @@ package com.katusoft.usecase.registervehicle;
 import com.katusoft.model.exception.FareNotFoundException;
 import com.katusoft.model.exception.VehicleAlreadyExistsException;
 import com.katusoft.model.fare.gateways.FareRepository;
+import com.katusoft.model.parkingspace.gateways.ParkingSpaceRepository;
 import com.katusoft.model.vehicle.Vehicle;
 import com.katusoft.model.vehicle.gateways.VehicleRepository;
 
@@ -12,11 +13,14 @@ public class RegisterVehicleUseCase {
 
   private final VehicleRepository vehicleRepository;
   private final FareRepository fareRepository;
+  private final ParkingSpaceRepository parkingSpaceRepository;
 
 
-  public RegisterVehicleUseCase(VehicleRepository vehicleRepository,  FareRepository fareRepository) {
+  public RegisterVehicleUseCase(VehicleRepository vehicleRepository,  FareRepository fareRepository,
+                                ParkingSpaceRepository parkingSpaceRepository) {
     this.vehicleRepository = vehicleRepository;
     this.fareRepository = fareRepository;
+    this.parkingSpaceRepository = parkingSpaceRepository;
   }
 
   public Vehicle execute(String licensePlate, UUID fareId){

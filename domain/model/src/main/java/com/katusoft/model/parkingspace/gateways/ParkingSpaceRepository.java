@@ -14,8 +14,9 @@ public interface ParkingSpaceRepository {
   List<ParkingSpace> findAll();
   Optional<ParkingSpace> findAvailableByType(Type type);
   List<ParkingSpace> findAllAvailable();
-  void  deleteById(UUID id);
+  void deleteById(UUID id);
   long countByType(Type type);
   boolean existsById(UUID id);
+  boolean existsByNumber(int number);
 
 }

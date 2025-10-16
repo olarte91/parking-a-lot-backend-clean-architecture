@@ -41,7 +41,7 @@ public class JpaFareRepositoryAdapter extends AdapterOperations<Fare, FareEntity
 
   @Override
   public boolean existsByType(Type type) {
-    return repository.existsByFareType(type);
+    return repository.existsByType(type);
   }
 
   @Override

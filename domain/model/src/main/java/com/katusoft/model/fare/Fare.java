@@ -5,7 +5,7 @@ import com.katusoft.model.valueobjects.ValuePerHour;
 import java.util.UUID;
 
 public class Fare {
-  private UUID id;
+  private final UUID id;
   private Type type;
   private ValuePerHour valuePerHour;
 
