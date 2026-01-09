@@ -32,6 +32,20 @@ public class JpaParkingSpaceRepositoryAdapter extends AdapterOperations<ParkingS
   }
 
   @Override
+  public List<ParkingSpace> findAll() {
+    List<ParkingSpaceEntity> entities = (List<ParkingSpaceEntity>) repository.findAll();
+
+    return entities.stream()
+        .map(entity -> new ParkingSpace(
+            entity.getId(),
+            entity.getType(),
+            entity.getNumber(),
+            entity.getStatus()
+        ))
+        .toList();
+  }
+
+  @Override
   public Optional<ParkingSpace> findById(int id) {
     return Optional.empty();
   }
@@ -63,6 +77,11 @@ public class JpaParkingSpaceRepositoryAdapter extends AdapterOperations<ParkingS
 
   @Override
   public boolean existsByNumber(int number) {
+    return false;
+  }
+
+  @Override
+  public boolean isAvailable(int number) {
     return false;
   }
 

@@ -22,12 +22,12 @@ public class RegisterVehicleUseCase {
     this.parkingSpaceRepository = parkingSpaceRepository;
   }
 
-//  public Vehicle execute(String licensePlate, int parkingSpaceNumber){
-//
-//    if(!parkingSpaceRepository.isAvailable(parkingSpaceNumber)){
-//      throw new ParkingSpaceAlreadyOccupiedException("ParkingSpace already occupied");
-//    }
-//
-//
-//  }
+  public Vehicle execute(String licensePlate, Integer parkingSpaceNumber) {
+
+    if (!parkingSpaceRepository.isAvailable(parkingSpaceNumber)) {
+      throw new ParkingSpaceAlreadyOccupiedException("ParkingSpace already occupied");
+    }
+
+    return null;
+  }
 }

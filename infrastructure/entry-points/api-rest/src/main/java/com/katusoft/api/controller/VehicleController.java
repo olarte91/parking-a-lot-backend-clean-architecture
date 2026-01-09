@@ -1,5 +1,6 @@
 package com.katusoft.api.controller;
 
+import com.katusoft.api.dto.RegisterVehicleRequest;
 import com.katusoft.api.dto.VehicleRequest;
 import com.katusoft.api.dto.VehicleResponse;
 import com.katusoft.model.vehicle.Vehicle;
@@ -21,8 +22,8 @@ public class VehicleController {
   }
 
   @PostMapping("/register")
-  public ResponseEntity<VehicleResponse> registerVehicle(@RequestBody VehicleRequest vehicleRequest) {
-    Vehicle vehicle = registerVehicleUseCase.execute(vehicleRequest.getLicensePlate(), vehicleRequest.getFareId());
+  public ResponseEntity<VehicleResponse> registerVehicle(@RequestBody RegisterVehicleRequest vehicleRequest) {
+    Vehicle vehicle = registerVehicleUseCase.execute(vehicleRequest.getLicensePlate(), vehicleRequest.getParkingSpace());
 
     return ResponseEntity.ok(new VehicleResponse(vehicle));
 

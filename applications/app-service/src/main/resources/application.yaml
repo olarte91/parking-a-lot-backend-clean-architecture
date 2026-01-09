@@ -17,7 +17,7 @@ spring:
 #    password: "pass"
 #    driverClassName: "org.h2.Driver"
   datasource:
-    url: "jdbc:postgresql://localhost:5432/parking_a_lot_2"
+    url: ${DB_NAME}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driverClassName: "org.postgresql.Driver"

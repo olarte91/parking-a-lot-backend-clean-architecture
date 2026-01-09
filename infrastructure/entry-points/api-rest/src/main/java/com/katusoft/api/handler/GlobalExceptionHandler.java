@@ -1,0 +1,29 @@
+package com.katusoft.api.handler;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    Map<String, String> errors = new HashMap<>();
+
+    ex.getBindingResult().getFieldErrors().forEach(error -> {
+      String fieldName = error.getField();
+      String errorMessage = error.getDefaultMessage();
+      errors.put(fieldName, errorMessage);
+
+      // ESTO ES LO QUE VERÁS EN INTELLIJ
+      //log.error("Error de validación en el campo '{}': {}", fieldName, errorMessage);
+    });
+
+    // Esto es lo que verá el navegador (un JSON con los campos erróneos)
+    return ResponseEntity.badRequest().body(errors);
+  }
+}

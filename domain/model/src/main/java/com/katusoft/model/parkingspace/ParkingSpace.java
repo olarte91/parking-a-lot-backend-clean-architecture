@@ -10,10 +10,12 @@ import java.util.UUID;
 
 public class ParkingSpace {
 
-  private final UUID id;
+  private UUID id;
   private Type type;
   private ParkingSpaceNumber number;
   private Status status;
+
+  public ParkingSpace(){}
 
   public ParkingSpace(Type type, int number) {
     this.id = UUID.randomUUID();
@@ -22,12 +24,32 @@ public class ParkingSpace {
     this.status = Status.AVAILABLE;
   }
 
+  public ParkingSpace(UUID id, Type type, int number, Status status) {
+    this.id = id;
+    this.type = type;
+    this.number = new ParkingSpaceNumber(number);
+    this.status = status;
+  }
+
+
+  public void setId(UUID id){
+    this.id = id;
+  }
+
   public UUID getId() {
     return id;
   }
 
+  public void setType(Type type) {
+    this.type = type;
+  }
+
   public Type getType() {
     return type;
+  }
+
+  public void setNumber(ParkingSpaceNumber number) {
+    this.number = number;
   }
 
   public int getParkingSpacenumber(){

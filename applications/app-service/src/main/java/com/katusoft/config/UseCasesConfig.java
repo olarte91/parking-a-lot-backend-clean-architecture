@@ -9,6 +9,7 @@ import com.katusoft.model.vehicle.gateways.VehicleRepository;
 import com.katusoft.usecase.createfare.CreateFareUseCase;
 import com.katusoft.usecase.createparkingspace.CreateParkingSpaceUseCase;
 import com.katusoft.usecase.createuser.CreateUserUseCase;
+import com.katusoft.usecase.getallparkingspaces.GetAllParkingSpacesUseCase;
 import com.katusoft.usecase.loginuser.LoginUserUseCase;
 import com.katusoft.usecase.registervehicle.RegisterVehicleUseCase;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,11 @@ public class UseCasesConfig {
   public CreateParkingSpaceUseCase createParkingSpaceUseCase(
       ParkingSpaceRepository repository) {
     return new CreateParkingSpaceUseCase(repository);
+  }
+
+  @Bean
+  public GetAllParkingSpacesUseCase getAllParkingSpacesUseCase(ParkingSpaceRepository repository) {
+    return new GetAllParkingSpacesUseCase(repository);
   }
 
   @Bean
@@ -53,7 +59,9 @@ public class UseCasesConfig {
   @Bean
   public RegisterVehicleUseCase registerVehicleUseCase(
       VehicleRepository vehicleRepository,
-      ParkingSpaceRepository parkingSpaceRepository,
+      ParkingSpaceRepository parkingSpaceRepository
 
-  )
+  ){
+    return new RegisterVehicleUseCase(vehicleRepository, parkingSpaceRepository);
+  }
 }
