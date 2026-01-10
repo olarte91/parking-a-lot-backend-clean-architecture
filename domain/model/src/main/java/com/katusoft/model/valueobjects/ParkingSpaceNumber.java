@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class ParkingSpaceNumber {
 
-  private int value;
+  private final int value;
 
   public ParkingSpaceNumber(int value){
     if(value < 0){

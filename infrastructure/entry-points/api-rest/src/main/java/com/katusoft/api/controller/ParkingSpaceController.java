@@ -7,6 +7,7 @@ import com.katusoft.model.parkingspace.ParkingSpace;
 import com.katusoft.usecase.createparkingspace.CreateParkingSpaceCommand;
 import com.katusoft.usecase.createparkingspace.CreateParkingSpaceUseCase;
 import com.katusoft.usecase.getallparkingspaces.GetAllParkingSpacesUseCase;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +33,7 @@ public class ParkingSpaceController {
   }
 
   @PostMapping("/create")
-  public ResponseEntity<ParkingSpaceResponse> create(@RequestBody ParkingSpaceRequest parkingSpaceRequest) {
+  public ResponseEntity<ParkingSpaceResponse> create( @RequestBody ParkingSpaceRequest parkingSpaceRequest) {
     CreateParkingSpaceCommand command = new CreateParkingSpaceCommand(
         parkingSpaceRequest.getType(),
         parkingSpaceRequest.getNumber()

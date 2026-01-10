@@ -71,12 +71,15 @@ public class JpaParkingSpaceRepositoryAdapter extends AdapterOperations<ParkingS
   }
 
   @Override
-  public boolean existsById(UUID id) {
-    return false;
-  }
+  public boolean existsById(UUID id) {return false;}
+
 
   @Override
   public boolean existsByNumber(int number) {
+
+    if(repository.existsByNumber(number)){
+      return true;
+    }
     return false;
   }
 
