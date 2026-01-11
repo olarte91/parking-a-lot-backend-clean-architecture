@@ -5,12 +5,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
+import java.time.LocalDateTime;
+
 @Setter
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-public class RegisterVehicleRequest {
+@NoArgsConstructor
+public class RegisterResponse {
 
   public String licensePlate;
-  public Integer parkingSpace;
+  public String vehicleType;
+  public String registrationDate;
+  public Integer parkingSpaceNumber;
 }

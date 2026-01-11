@@ -13,11 +13,11 @@ public class CreateParkingSpaceUseCase {
   }
 
   public ParkingSpace execute(CreateParkingSpaceCommand createParkingSpaceCommand) {
-    if(parkingSpaceRepository.existsByNumber(createParkingSpaceCommand.getNumber())) {
+    if(parkingSpaceRepository.isNumberAvailable(createParkingSpaceCommand.getNumber())) {
       throw new ParkingSpaceAlreadyExistsException("Parking space already exists with number " +
           createParkingSpaceCommand.getNumber());
     }
     ParkingSpace parkingSpace = new ParkingSpace(createParkingSpaceCommand.getType(), createParkingSpaceCommand.getNumber());
-    return parkingSpaceRepository.createParkingSpace(parkingSpace);
+    return parkingSpaceRepository.save(parkingSpace);
   }
 }

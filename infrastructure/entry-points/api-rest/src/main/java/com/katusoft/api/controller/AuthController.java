@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
   private final CreateUserUseCase createUserUseCase;
@@ -35,7 +35,7 @@ public class AuthController {
     this.tokenService = tokenService;
   }
 
-  @PostMapping("/register")
+  @PostMapping
   public ResponseEntity<UserResponse> register (@Valid @RequestBody CreateUserRequest request) {
     CreateUserCommand command = new CreateUserCommand(
         request.getUsername(),

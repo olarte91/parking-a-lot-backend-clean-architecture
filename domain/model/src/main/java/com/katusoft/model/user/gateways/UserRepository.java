@@ -9,7 +9,7 @@ public interface UserRepository {
   boolean findByEmail(String email);
   boolean findByUsername(String username);
   Optional<User> findUserByUsername(String username);
-  boolean findUserById(UUID id);
+  Optional<User> findUserById(UUID id);
   User createUser(User user);
   User updateUser(User user);
   void deleteUser(UUID userId);

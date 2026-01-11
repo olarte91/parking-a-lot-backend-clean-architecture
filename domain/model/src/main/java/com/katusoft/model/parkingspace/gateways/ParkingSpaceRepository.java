@@ -9,15 +9,20 @@ import java.util.UUID;
 
 public interface ParkingSpaceRepository {
 
-  ParkingSpace createParkingSpace(ParkingSpace parkingSpace);
-  Optional<ParkingSpace> findById(int id);
+  //Commands
+  ParkingSpace save(ParkingSpace parkingSpace);
+  void deleteById(UUID id);
+
+  //Queries
+  Optional<ParkingSpace> findById(UUID id);
+  Optional<ParkingSpace> findByNumber(Integer number);
   List<ParkingSpace> findAll();
   Optional<ParkingSpace> findAvailableByType(Type type);
+
+  //Business queries
   List<ParkingSpace> findAllAvailable();
-  void deleteById(UUID id);
   long countByType(Type type);
   boolean existsById(UUID id);
-  boolean existsByNumber(int number);
-  boolean isAvailable (int number);
+  boolean isNumberAvailable(int number);
 
 }

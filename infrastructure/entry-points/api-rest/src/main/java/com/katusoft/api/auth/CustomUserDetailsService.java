@@ -1,11 +1,13 @@
-package com.katusoft.config;
+package com.katusoft.api.auth;
 
 import com.katusoft.model.user.gateways.UserRepository;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -21,10 +23,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     var user = userRepository.findUserByUsername(username)
         .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
-    return User.builder()
-        .username(user.getUsername())
-        .password(user.getPassword())
-        .authorities("ROLE_" + user.getRole())
-        .build();
+    return new UserPrincipal(
+        user.getId(),
+        user.getUsername(),
+        user.getPassword(),
+        List.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()))
+    );
   }
 }

@@ -14,19 +14,19 @@ public class UpdateUserUseCase {
     this.userRepository = userRepository;
   }
 
-  public User execute(UpdateUserCommand command){
-    if(!userRepository.findUserById(command.getId())){
-      throw new UserNotFoundException("User not found");
-    }
-    if(userRepository.findByUsername(command.getUsername())){
-      throw new UserAlreadyExistsException("Username already exists");
-    }
-    if(userRepository.findByEmail(command.getEmail())){
-      throw new UserAlreadyExistsException("Email already exists");
-    }
-
-    User user = new User(command.getId(), command.getUsername(), command.getEmail(),  command.getPassword());
-
-    return userRepository.updateUser(user);
-  }
+//  public User execute(UpdateUserCommand command){
+//    if(!userRepository.findUserById(command.getId())){
+//      throw new UserNotFoundException("User not found");
+//    }
+//    if(userRepository.findByUsername(command.getUsername())){
+//      throw new UserAlreadyExistsException("Username already exists");
+//    }
+//    if(userRepository.findByEmail(command.getEmail())){
+//      throw new UserAlreadyExistsException("Email already exists");
+//    }
+//
+//    User user = new User(command.getId(), command.getUsername(), command.getEmail(),  command.getPassword());
+//
+//    return userRepository.updateUser(user);
+//  }
 }

@@ -1,4 +1,4 @@
-package com.katusoft.api.config;
+package com.katusoft.api.auth;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;

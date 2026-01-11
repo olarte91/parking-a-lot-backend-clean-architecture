@@ -2,6 +2,8 @@ package com.katusoft.jpa;
 
 import com.katusoft.jpa.entity.ParkingSpaceEntity;
 import com.katusoft.jpa.helper.AdapterOperations;
+import com.katusoft.jpa.mapper.ParkingSpaceMapper;
+import com.katusoft.model.exception.ParkingSpaceNotFoundException;
 import com.katusoft.model.fare.Type;
 import com.katusoft.model.parkingspace.ParkingSpace;
 import com.katusoft.model.parkingspace.gateways.ParkingSpaceRepository;
@@ -16,19 +18,22 @@ import java.util.UUID;
 public class JpaParkingSpaceRepositoryAdapter extends AdapterOperations<ParkingSpace, ParkingSpaceEntity, UUID, JpaParkingSpaceRepository>
     implements ParkingSpaceRepository {
 
-  public JpaParkingSpaceRepositoryAdapter(JpaParkingSpaceRepository repository, ObjectMapper mapper) {
+  private final ParkingSpaceMapper newMapper;
+
+  public JpaParkingSpaceRepositoryAdapter(JpaParkingSpaceRepository repository, ObjectMapper mapper, ParkingSpaceMapper newMapper) {
     /**
      *  Could be use mapper.mapBuilder if your domain model implement builder pattern
      *  super(repository, mapper, d -> mapper.mapBuilder(d,ObjectModel.ObjectModelBuilder.class).build());
      *  Or using mapper.map with the class of the object model
      */
     super(repository, mapper, d -> mapper.map(d, ParkingSpace.class));
+    this.newMapper = newMapper;
   }
 
   @Override
-  public ParkingSpace createParkingSpace(ParkingSpace parkingSpace) {
-    ParkingSpaceEntity saved = repository.save(toEntity(parkingSpace));
-    return toDomain(saved);
+  public ParkingSpace save(ParkingSpace parkingSpace) {
+    ParkingSpaceEntity saved = repository.save(newMapper.toEntity(parkingSpace));
+    return newMapper.toDomain(saved);
   }
 
   @Override
@@ -46,8 +51,14 @@ public class JpaParkingSpaceRepositoryAdapter extends AdapterOperations<ParkingS
   }
 
   @Override
-  public Optional<ParkingSpace> findById(int id) {
+  public Optional<ParkingSpace> findById(UUID id) {
     return Optional.empty();
+  }
+
+  @Override
+  public Optional<ParkingSpace> findByNumber(Integer number) {
+    return Optional.ofNullable(newMapper.toDomain(repository.findByNumber(number)
+        .orElseThrow(() -> new ParkingSpaceNotFoundException("Parking space with number " + number + " not found"))));
   }
 
   @Override
@@ -75,32 +86,9 @@ public class JpaParkingSpaceRepositoryAdapter extends AdapterOperations<ParkingS
 
 
   @Override
-  public boolean existsByNumber(int number) {
-
-    if(repository.existsByNumber(number)){
-      return true;
-    }
-    return false;
+  public boolean isNumberAvailable(int number) {
+    return repository.existsByNumber(number);
   }
 
-  @Override
-  public boolean isAvailable(int number) {
-    return false;
-  }
 
-  private ParkingSpaceEntity toEntity(ParkingSpace parkingSpace) {
-    return ParkingSpaceEntity.builder()
-        .id(parkingSpace.getId())
-        .status(parkingSpace.getStatus())
-        .number(parkingSpace.getParkingSpacenumber())
-        .type(parkingSpace.getType())
-        .build();
-  }
-
-  private ParkingSpace toDomain(ParkingSpaceEntity parkingSpaceEntity) {
-    return new ParkingSpace(
-        parkingSpaceEntity.getType(),
-        parkingSpaceEntity.getNumber()
-    );
-  }
 }

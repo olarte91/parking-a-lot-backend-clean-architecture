@@ -13,10 +13,10 @@ public class DeleteUserUseCase {
     this.userRepository = userRepository;
   }
 
-  public void execute(UUID id){
-    if(userRepository.findUserById(id)){
-      throw new UserNotFoundException("User not found");
-    }
-    userRepository.deleteUser(id);
-  }
+//  public void execute(UUID id){
+//    if(userRepository.findUserById(id)){
+//      throw new UserNotFoundException("User not found");
+//    }
+//    userRepository.deleteUser(id);
+//  }
 }

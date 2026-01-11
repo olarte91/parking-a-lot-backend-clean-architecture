@@ -1,4 +1,4 @@
-package com.katusoft.config;
+package com.katusoft.api.auth;
 
 import com.katusoft.model.authentication.gateways.TokenService;
 import jakarta.servlet.FilterChain;

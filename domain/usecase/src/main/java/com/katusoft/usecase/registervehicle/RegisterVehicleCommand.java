@@ -1,19 +1,34 @@
 package com.katusoft.usecase.registervehicle;
 
-import com.katusoft.model.parkingspace.ParkingSpace;
-import com.katusoft.model.vehicle.Vehicle;
-
-import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class RegisterVehicleCommand {
 
-  private Vehicle vehicle;
-  private LocalDateTime startTime;
-  private ParkingSpace parkingSpace;
+  private String licensePlate;
+  private Integer parkingSpaceNumber;
+  private String vehicleType;
+  private UUID userId;
 
-  public RegisterVehicleCommand(Vehicle vehicle, LocalDateTime startTime, ParkingSpace parkingSpace) {
-    this.vehicle = vehicle;
-    this.startTime = startTime;
-    this.parkingSpace = parkingSpace;
+  public RegisterVehicleCommand(String licensePlate, Integer parkingSpaceNumber, String vehicleType, UUID userId) {
+    this.licensePlate = licensePlate.toUpperCase();
+    this.parkingSpaceNumber = parkingSpaceNumber;
+    this.vehicleType = vehicleType;
+    this.userId = userId;
+  }
+
+  public String getLicensePlate() {
+    return licensePlate;
+  }
+
+  public Integer  getParkingSpaceNumber() {
+    return parkingSpaceNumber;
+  }
+
+  public String getVehicleType() {
+    return vehicleType;
+  }
+
+  public UUID getUserId() {
+    return userId;
   }
 }

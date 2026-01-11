@@ -2,6 +2,7 @@ package com.katusoft.jpa;
 
 import com.katusoft.jpa.entity.UserEntity;
 import com.katusoft.jpa.helper.AdapterOperations;
+import com.katusoft.jpa.mapper.UserMapper;
 import com.katusoft.model.user.User;
 import com.katusoft.model.user.gateways.UserRepository;
 import org.reactivecommons.utils.ObjectMapper;
@@ -14,13 +15,16 @@ import java.util.UUID;
 public class JpaUserRepositoryAdapter extends AdapterOperations<User, UserEntity, UUID, JpaUserRepository>
     implements UserRepository {
 
-  public JpaUserRepositoryAdapter(JpaUserRepository repository, ObjectMapper mapper) {
+  private final UserMapper userMapper;
+
+  public JpaUserRepositoryAdapter(JpaUserRepository repository, ObjectMapper mapper, UserMapper userMapper) {
     /**
      *  Could be use mapper.mapBuilder if your domain model implement builder pattern
      *  super(repository, mapper, d -> mapper.mapBuilder(d,ObjectModel.ObjectModelBuilder.class).build());
      *  Or using mapper.map with the class of the object model
      */
     super(repository, mapper, d -> mapper.map(d, User.class));
+    this.userMapper = userMapper;
   }
 
   @Override
@@ -36,31 +40,17 @@ public class JpaUserRepositoryAdapter extends AdapterOperations<User, UserEntity
   @Override
   public Optional<User> findUserByUsername(String username) {
     return repository.findByUsername(username)
-        .map(entity -> mapper.map(entity, User.class));
+        .map(userMapper::toDomain);
   }
 
   @Override
-  public boolean findUserById(UUID id) {
-    return repository.findById(id).isPresent();
+  public Optional<User> findUserById(UUID id) {
+    return repository.findById(id).map(userMapper::toDomain);
   }
 
   @Override
   public User createUser(User user) {
-    UserEntity entity = new UserEntity(
-        user.getId(),
-        user.getUsername(),
-        user.getEmail(),
-        user.getPassword(),
-        user.getRole()
-    );
-    UserEntity saved = repository.save(entity);
-
-    return new User(
-        saved.getId(),
-        saved.getUsername(),
-        saved.getEmail(),
-        saved.getPassword()
-        );
+    return save(user);
   }
 
   @Override
@@ -75,12 +65,6 @@ public class JpaUserRepositoryAdapter extends AdapterOperations<User, UserEntity
 
   @Override
   protected UserEntity toData(User user) {
-    return new UserEntity(
-        user.getId(),
-        user.getUsername(),
-        user.getEmail(),
-        user.getPassword(),
-        user.getRole()
-    );
+    return userMapper.toEntity(user);
   }
 }

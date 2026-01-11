@@ -4,8 +4,8 @@ import com.katusoft.model.authentication.gateways.PasswordService;
 import com.katusoft.model.authentication.gateways.TokenService;
 import com.katusoft.model.fare.gateways.FareRepository;
 import com.katusoft.model.parkingspace.gateways.ParkingSpaceRepository;
+import com.katusoft.model.register.gateways.RegisterRepository;
 import com.katusoft.model.user.gateways.UserRepository;
-import com.katusoft.model.vehicle.gateways.VehicleRepository;
 import com.katusoft.usecase.createfare.CreateFareUseCase;
 import com.katusoft.usecase.createparkingspace.CreateParkingSpaceUseCase;
 import com.katusoft.usecase.createuser.CreateUserUseCase;
@@ -58,10 +58,11 @@ public class UseCasesConfig {
 
   @Bean
   public RegisterVehicleUseCase registerVehicleUseCase(
-      VehicleRepository vehicleRepository,
-      ParkingSpaceRepository parkingSpaceRepository
+      ParkingSpaceRepository parkingSpaceRepository,
+      UserRepository userRepository,
+      RegisterRepository registerRepository
 
   ){
-    return new RegisterVehicleUseCase(vehicleRepository, parkingSpaceRepository);
+    return new RegisterVehicleUseCase(parkingSpaceRepository, userRepository, registerRepository);
   }
 }

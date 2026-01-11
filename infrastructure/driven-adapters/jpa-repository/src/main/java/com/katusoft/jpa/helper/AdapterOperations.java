@@ -58,10 +58,6 @@ public abstract class AdapterOperations<E, D, I, R extends CrudRepository<D, I> 
         return repository.saveAll(data);
     }
 
-//    public Optional<Fare> findById(I id) {
-//        return toEntity(repository.findById(id).orElse(null));
-//    }
-
     public List<E> findByExample(E entity) {
         return toList(repository.findAll( Example.of(toData(entity))));
     }

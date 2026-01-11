@@ -1,7 +1,7 @@
 package com.katusoft.model.exception;
 
-public class VehicleAlreadyExistsException extends RuntimeException {
+public class VehicleAlreadyExistsException extends DomainException {
   public VehicleAlreadyExistsException(String message) {
-    super(message);
+    super(message, "VEHICLE ALREADY REGISTERED");
   }
 }

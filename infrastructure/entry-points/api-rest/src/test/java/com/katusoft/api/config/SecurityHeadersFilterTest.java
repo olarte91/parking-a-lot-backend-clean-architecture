@@ -1,5 +1,6 @@
 package com.katusoft.api.config;
 
+import com.katusoft.api.auth.SecurityHeadersFilter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 
