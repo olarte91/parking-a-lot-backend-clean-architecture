@@ -1,7 +1,6 @@
 package com.katusoft.api.handler;
 
 import com.katusoft.model.exception.DomainException;
-import com.katusoft.model.exception.InvalidParkingSpaceNumberException;
 import com.katusoft.model.exception.ParkingSpaceAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,19 +32,10 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(DomainException.class)
   public ResponseEntity<ErrorResponse> handleDomainException(DomainException ex) {
     return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
-        .body(new ErrorResponse("422", "Violación de reglas de dominio", ex.getMessage()));
+        .body(new ErrorResponse(
+            ex.getCode(),
+            ex.getMessage(),
+            "Violación de reglas de dominio"));
   }
 
-  @ExceptionHandler(ParkingSpaceAlreadyExistsException.class)
-  public ResponseEntity<ErrorResponse> handleParkingSpaceExists(ParkingSpaceAlreadyExistsException ex) {
-    ErrorResponse error = new ErrorResponse("409", "Domain Exception - Conflict", ex.getMessage());
-    return new ResponseEntity<>(error, HttpStatus.CONFLICT);
-  }
-
-////  @ExceptionHandler(InvalidParkingSpaceNumberException.class)
-////  public ResponseEntity<ErrorResponse> handleInvalidParkingSpaceNumber(InvalidParkingSpaceNumberException ex) {
-////    return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(
-////        new ErrorResponse("400", "Domain Exception - parkingspace number out of range", ex.getMessage())
-////    );
-//  }
 }
