@@ -1,7 +1,7 @@
 package com.katusoft.jpa.entity;
 
-import com.katusoft.model.fare.Type;
 import com.katusoft.model.parkingspace.Status;
+import com.katusoft.model.register.VehicleType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -30,7 +30,7 @@ public class ParkingSpaceEntity {
 
   @Column
   @Enumerated(EnumType.STRING)
-  private Type type;
+  private VehicleType type;
 
   @Column
   private int number;

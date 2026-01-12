@@ -1,7 +1,6 @@
 package com.katusoft.api.handler;
 
 import com.katusoft.model.exception.DomainException;
-import com.katusoft.model.exception.ParkingSpaceAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;

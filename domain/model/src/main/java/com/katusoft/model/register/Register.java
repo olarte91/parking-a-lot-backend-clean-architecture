@@ -48,6 +48,14 @@ public Register (UUID id, LicensePlate licensePlate, ParkingSpace parkingSpace, 
     }
   }
 
+  public void setDeparture(LocalDateTime departure){
+  this.departure = departure;
+  }
+
+  public void setTotalPrice(double totalPrice){
+  this.totalPrice = totalPrice;
+  }
+
   public UUID getId() {
   return id;
   }
@@ -79,5 +87,6 @@ public Register (UUID id, LicensePlate licensePlate, ParkingSpace parkingSpace, 
   public ParkingSpace getParkingSpace() {
   return parkingSpace;
   }
+
 
 }

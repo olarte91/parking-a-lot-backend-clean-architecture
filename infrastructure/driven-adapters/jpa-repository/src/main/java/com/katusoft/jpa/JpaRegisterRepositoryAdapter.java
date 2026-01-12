@@ -30,14 +30,8 @@ public class JpaRegisterRepositoryAdapter extends AdapterOperations<Register, Re
   @Override
   public Register save(Register register) {
     RegisterEntity entity = registerMapper.toEntity(register);
-    return registerMapper.toDomain(repository.save(entity));
-  }
-
-  @Override
-  public Register findByLicensePlate(String licensePlate) {
-    return repository.findByLicensePlateAndDepartureIsNull(licensePlate)
-        .map(registerMapper::toDomain)
-        .orElse(null);
+    RegisterEntity savedEntity = repository.save(entity);
+    return registerMapper.toDomain(savedEntity);
   }
 
   @Override

@@ -11,6 +11,7 @@ import com.katusoft.usecase.createparkingspace.CreateParkingSpaceUseCase;
 import com.katusoft.usecase.createuser.CreateUserUseCase;
 import com.katusoft.usecase.getallparkingspaces.GetAllParkingSpacesUseCase;
 import com.katusoft.usecase.loginuser.LoginUserUseCase;
+import com.katusoft.usecase.processvehicleexit.ProcessVehicleExitUseCase;
 import com.katusoft.usecase.registervehicle.RegisterVehicleUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -60,9 +61,14 @@ public class UseCasesConfig {
   public RegisterVehicleUseCase registerVehicleUseCase(
       ParkingSpaceRepository parkingSpaceRepository,
       UserRepository userRepository,
-      RegisterRepository registerRepository
-
-  ){
+      RegisterRepository registerRepository){
     return new RegisterVehicleUseCase(parkingSpaceRepository, userRepository, registerRepository);
+  }
+
+  @Bean
+  public ProcessVehicleExitUseCase processVehicleExitUseCase(RegisterRepository register,
+                                               ParkingSpaceRepository parkingSpaceRepository,
+                                               FareRepository fare){
+    return new ProcessVehicleExitUseCase(register, parkingSpaceRepository, fare);
   }
 }

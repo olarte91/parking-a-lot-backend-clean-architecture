@@ -1,18 +1,18 @@
 package com.katusoft.usecase.createparkingspace;
 
-import com.katusoft.model.fare.Type;
+import com.katusoft.model.register.VehicleType;
 
 public class CreateParkingSpaceCommand {
 
-  private Type type;
+  private VehicleType type;
   private int number;
 
-  public CreateParkingSpaceCommand(Type type, int number) {
+  public CreateParkingSpaceCommand(VehicleType type, int number) {
     this.type = type;
     this.number = number;
   }
 
-  public Type getType() {
+  public VehicleType getType() {
     return type;
   }
 

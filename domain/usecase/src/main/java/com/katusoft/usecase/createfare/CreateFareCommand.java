@@ -1,18 +1,16 @@
 package com.katusoft.usecase.createfare;
 
-import com.katusoft.model.fare.Type;
-
 public class CreateFareCommand {
 
-  private Type type;
+  private String type;
   private double amount;
 
-  public CreateFareCommand(Type type, double amount) {
+  public CreateFareCommand(String type, double amount) {
     this.type = type;
     this.amount = amount;
   }
 
-  public Type getFareType() {
+  public String getFareType() {
     return type;
   }
 

@@ -3,6 +3,7 @@ package com.katusoft.jpa.mapper;
 import com.katusoft.jpa.entity.RegisterEntity;
 import com.katusoft.model.register.Register;
 import com.katusoft.model.register.VehicleType;
+import com.katusoft.model.valueobjects.LicensePlate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -32,17 +33,15 @@ public class RegisterMapper {
   public Register toDomain(RegisterEntity entity) {
     if (entity == null) return null;
 
-    Register domain = new Register(
-        entity.getLicensePlate(),
+    return new Register(
+        entity.getId(),
+        new LicensePlate(entity.getLicensePlate()),
         parkingSpaceMapper.toDomain(entity.getParkingSpace()),
         VehicleType.valueOf(entity.getVehicleType()),
-        userMapper.toDomain(entity.getUser())
+        userMapper.toDomain(entity.getUser()),
+        entity.getTotalPrice(),
+        entity.getEntrance(),
+        entity.getDeparture()
     );
-
-    if (entity.getDeparture() != null) {
-      domain.registerDeparture(entity.getTotalPrice());
-    }
-
-    return domain;
   }
 }

@@ -8,7 +8,6 @@ import java.util.Optional;
 public interface RegisterRepository {
 
   Register save(Register register);
-  Register findByLicensePlate(String licensePlate);
   List<Register> findAll();
   Optional<Register> findActiveByLicensePlate(String licensePlate);
 }

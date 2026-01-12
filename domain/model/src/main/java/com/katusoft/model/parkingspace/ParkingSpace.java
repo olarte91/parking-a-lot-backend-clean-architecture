@@ -2,7 +2,7 @@ package com.katusoft.model.parkingspace;
 
 import com.katusoft.model.exception.ParkingSpaceAlreadyAvailableException;
 import com.katusoft.model.exception.ParkingSpaceAlreadyOccupiedException;
-import com.katusoft.model.fare.Type;
+import com.katusoft.model.register.VehicleType;
 import com.katusoft.model.valueobjects.ParkingSpaceNumber;
 
 import java.util.Objects;
@@ -11,20 +11,20 @@ import java.util.UUID;
 public class ParkingSpace {
 
   private UUID id;
-  private Type type;
+  private VehicleType type;
   private ParkingSpaceNumber number;
   private Status status;
 
   public ParkingSpace(){}
 
-  public ParkingSpace(Type type, int number) {
+  public ParkingSpace(VehicleType type, int number) {
     this.id = UUID.randomUUID();
     this.type = Objects.requireNonNull(type, "Type cannot be null");
     this.number = new ParkingSpaceNumber(number);
     this.status = Status.AVAILABLE;
   }
 
-  public ParkingSpace(UUID id, Type type, int number, Status status) {
+  public ParkingSpace(UUID id, VehicleType type, int number, Status status) {
     this.id = id;
     this.type = type;
     this.number = new ParkingSpaceNumber(number);
@@ -40,11 +40,11 @@ public class ParkingSpace {
     return id;
   }
 
-  public void setType(Type type) {
+  public void setType(VehicleType type) {
     this.type = type;
   }
 
-  public Type getType() {
+  public VehicleType getType() {
     return type;
   }
 
@@ -68,8 +68,8 @@ public class ParkingSpace {
   }
 
   public void free(){
-    if(this.status == Status.AVAILABLE){
-      throw new ParkingSpaceAlreadyAvailableException("ParkingSpace already available");
+    if(this.status == Status.AVAILABLE) {
+      return;
     }
     this.status = Status.AVAILABLE;
   }

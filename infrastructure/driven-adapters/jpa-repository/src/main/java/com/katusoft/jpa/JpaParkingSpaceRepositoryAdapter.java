@@ -4,7 +4,6 @@ import com.katusoft.jpa.entity.ParkingSpaceEntity;
 import com.katusoft.jpa.helper.AdapterOperations;
 import com.katusoft.jpa.mapper.ParkingSpaceMapper;
 import com.katusoft.model.exception.ParkingSpaceNotFoundException;
-import com.katusoft.model.fare.Type;
 import com.katusoft.model.parkingspace.ParkingSpace;
 import com.katusoft.model.parkingspace.gateways.ParkingSpaceRepository;
 import org.reactivecommons.utils.ObjectMapper;
@@ -62,11 +61,6 @@ public class JpaParkingSpaceRepositoryAdapter extends AdapterOperations<ParkingS
   }
 
   @Override
-  public Optional<ParkingSpace> findAvailableByType(Type type) {
-    return Optional.empty();
-  }
-
-  @Override
   public List<ParkingSpace> findAllAvailable() {
     return List.of();
   }
@@ -74,11 +68,6 @@ public class JpaParkingSpaceRepositoryAdapter extends AdapterOperations<ParkingS
   @Override
   public void deleteById(UUID id) {
 
-  }
-
-  @Override
-  public long countByType(Type type) {
-    return 0;
   }
 
   @Override
