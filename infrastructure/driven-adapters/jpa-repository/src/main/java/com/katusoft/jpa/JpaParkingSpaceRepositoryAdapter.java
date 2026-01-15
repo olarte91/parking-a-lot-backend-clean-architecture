@@ -50,29 +50,10 @@ public class JpaParkingSpaceRepositoryAdapter extends AdapterOperations<ParkingS
   }
 
   @Override
-  public Optional<ParkingSpace> findById(UUID id) {
-    return Optional.empty();
-  }
-
-  @Override
   public Optional<ParkingSpace> findByNumber(Integer number) {
     return Optional.ofNullable(newMapper.toDomain(repository.findByNumber(number)
         .orElseThrow(() -> new ParkingSpaceNotFoundException("Parking space with number " + number + " not found"))));
   }
-
-  @Override
-  public List<ParkingSpace> findAllAvailable() {
-    return List.of();
-  }
-
-  @Override
-  public void deleteById(UUID id) {
-
-  }
-
-  @Override
-  public boolean existsById(UUID id) {return false;}
-
 
   @Override
   public boolean isNumberAvailable(int number) {

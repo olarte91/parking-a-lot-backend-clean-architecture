@@ -18,10 +18,10 @@ public class UpdateUserUseCase {
 //    if(!userRepository.findUserById(command.getId())){
 //      throw new UserNotFoundException("User not found");
 //    }
-//    if(userRepository.findByUsername(command.getUsername())){
+//    if(userRepository.existsByUsername(command.getUsername())){
 //      throw new UserAlreadyExistsException("Username already exists");
 //    }
-//    if(userRepository.findByEmail(command.getEmail())){
+//    if(userRepository.existsByEmail(command.getEmail())){
 //      throw new UserAlreadyExistsException("Email already exists");
 //    }
 //

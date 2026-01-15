@@ -28,12 +28,12 @@ public class JpaUserRepositoryAdapter extends AdapterOperations<User, UserEntity
   }
 
   @Override
-  public boolean findByEmail(String email) {
+  public boolean existsByEmail(String email) {
     return repository.findByEmail(email).isPresent();
   }
 
   @Override
-  public boolean findByUsername(String username) {
+  public boolean existsByUsername(String username) {
     return repository.findByUsername(username).isPresent();
   }
 
@@ -49,18 +49,8 @@ public class JpaUserRepositoryAdapter extends AdapterOperations<User, UserEntity
   }
 
   @Override
-  public User createUser(User user) {
+  public User save(User user) {
     return save(user);
-  }
-
-  @Override
-  public User updateUser(User user) {
-    return save(user);
-  }
-
-  @Override
-  public void deleteUser(UUID userId) {
-    repository.deleteById(userId);
   }
 
   @Override

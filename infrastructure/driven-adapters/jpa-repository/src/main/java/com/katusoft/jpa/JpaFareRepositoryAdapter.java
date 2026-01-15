@@ -50,9 +50,4 @@ public class JpaFareRepositoryAdapter extends AdapterOperations<Fare, FareEntity
     return repository.findByType(type).isPresent();
   }
 
-  @Override
-  public void deleteById(UUID id) {
-    repository.deleteById(id);
-  }
-
 }

@@ -18,16 +18,16 @@ public class CreateUserUseCase {
   }
 
   public User execute(CreateUserCommand command){
-    if(userRepository.findByUsername(command.getUsername())){
+    if(userRepository.existsByUsername(command.getUsername())){
       throw new UserAlreadyExistsException("The user " + command.getUsername() + " already exists");
     }
-    if(userRepository.findByEmail(command.getEmail())){
+    if(userRepository.existsByEmail(command.getEmail())){
       throw new UserAlreadyExistsException("The user with email: " + command.getEmail() + " already exists");
     }
 
     String encodedPassword = passwordEncoder.encode(command.getPassword());
     User user =  new User(UUID.randomUUID(), command.getUsername(), command.getEmail(), encodedPassword);
 
-    return userRepository.createUser(user);
+    return userRepository.save(user);
   }
 }

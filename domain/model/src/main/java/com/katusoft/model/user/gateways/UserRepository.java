@@ -6,11 +6,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository {
-  boolean findByEmail(String email);
-  boolean findByUsername(String username);
+  boolean existsByEmail(String email);
+  boolean existsByUsername(String username);
   Optional<User> findUserByUsername(String username);
   Optional<User> findUserById(UUID id);
-  User createUser(User user);
-  User updateUser(User user);
-  void deleteUser(UUID userId);
+  User save(User user);
 }

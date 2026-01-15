@@ -10,16 +10,12 @@ public interface ParkingSpaceRepository {
 
   //Commands
   ParkingSpace save(ParkingSpace parkingSpace);
-  void deleteById(UUID id);
 
   //Queries
-  Optional<ParkingSpace> findById(UUID id);
   Optional<ParkingSpace> findByNumber(Integer number);
   List<ParkingSpace> findAll();
 
   //Business queries
-  List<ParkingSpace> findAllAvailable();
-  boolean existsById(UUID id);
   boolean isNumberAvailable(int number);
 
 }
