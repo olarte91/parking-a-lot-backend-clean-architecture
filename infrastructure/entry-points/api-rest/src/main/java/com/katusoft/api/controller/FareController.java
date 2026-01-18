@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/fare")
+@RequestMapping("api/v1/fare")
 public class FareController {
 
   private final CreateFareUseCase createFareUseCase;

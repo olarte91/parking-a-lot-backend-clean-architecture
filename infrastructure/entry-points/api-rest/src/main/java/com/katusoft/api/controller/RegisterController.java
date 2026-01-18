@@ -6,6 +6,7 @@ import com.katusoft.api.dto.RegisterRequest;
 import com.katusoft.api.dto.RegisterResponse;
 import com.katusoft.api.mapper.RegisterRestMapper;
 import com.katusoft.model.register.Register;
+import com.katusoft.usecase.getallregisters.GetAllRegistersUseCase;
 import com.katusoft.usecase.processvehicleexit.ProcessVehicleExitUseCase;
 import com.katusoft.usecase.registervehicle.RegisterVehicleCommand;
 import com.katusoft.usecase.registervehicle.RegisterVehicleUseCase;
@@ -13,6 +14,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,20 +22,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/registers")
 public class RegisterController {
 
   private final RegisterVehicleUseCase registerVehicleUseCase;
   private final ProcessVehicleExitUseCase exitUseCase;
+  private final GetAllRegistersUseCase registers;
   private final RegisterRestMapper mapper;
 
   public RegisterController(RegisterVehicleUseCase registerVehicleUseCase,
                             ProcessVehicleExitUseCase exitUseCase,
+                            GetAllRegistersUseCase registers,
                             RegisterRestMapper mapper) {
     this.registerVehicleUseCase = registerVehicleUseCase;
+    this.registers = registers;
     this.exitUseCase = exitUseCase;
     this.mapper = mapper;
+  }
+
+  @GetMapping
+  public ResponseEntity<List<RegisterResponse>> getAll(){
+    List<Register> allRegisters = registers.execute();
+    List<RegisterResponse> response = mapper.toListResponse(allRegisters);
+      return ResponseEntity.ok(response);
   }
 
   @PostMapping

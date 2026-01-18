@@ -10,6 +10,7 @@ import com.katusoft.usecase.createfare.CreateFareUseCase;
 import com.katusoft.usecase.createparkingspace.CreateParkingSpaceUseCase;
 import com.katusoft.usecase.createuser.CreateUserUseCase;
 import com.katusoft.usecase.getallparkingspaces.GetAllParkingSpacesUseCase;
+import com.katusoft.usecase.getallregisters.GetAllRegistersUseCase;
 import com.katusoft.usecase.loginuser.LoginUserUseCase;
 import com.katusoft.usecase.processvehicleexit.ProcessVehicleExitUseCase;
 import com.katusoft.usecase.registervehicle.RegisterVehicleUseCase;
@@ -70,5 +71,10 @@ public class UseCasesConfig {
                                                ParkingSpaceRepository parkingSpaceRepository,
                                                FareRepository fare){
     return new ProcessVehicleExitUseCase(register, parkingSpaceRepository, fare);
+  }
+
+  @Bean
+  public GetAllRegistersUseCase getAllRegistersUseCase(RegisterRepository register){
+    return new GetAllRegistersUseCase(register);
   }
 }

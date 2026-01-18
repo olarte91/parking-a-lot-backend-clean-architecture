@@ -5,6 +5,9 @@ import com.katusoft.api.dto.RegisterResponse;
 import com.katusoft.model.register.Register;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+import java.util.List;
+
 @Component
 public class RegisterRestMapperImpl implements RegisterRestMapper {
 
@@ -36,5 +39,14 @@ public class RegisterRestMapperImpl implements RegisterRestMapper {
         .hours(hours)
         .totalPrice(register.getTotalPrice())
         .build();
+  }
+
+  @Override
+  public List<RegisterResponse> toListResponse(List<Register> domainList) {
+    if(domainList == null) return Collections.emptyList();
+
+    return domainList.stream()
+        .map(this::toResponse)
+        .toList();
   }
 }

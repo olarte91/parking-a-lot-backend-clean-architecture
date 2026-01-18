@@ -31,9 +31,8 @@ public class SecurityConfig {
         .cors(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("api/v1/auth/**").permitAll()
-            .requestMatchers("fare/**").permitAll()
-            .requestMatchers("/vehicle/**").permitAll()
-            .requestMatchers("/parking-space/**").permitAll()
+            .requestMatchers("api/v1/fare/**").authenticated()
+            .requestMatchers("api/v1/parking-space/**").permitAll()
             .anyRequest().authenticated()
         )
         .sessionManagement(session ->

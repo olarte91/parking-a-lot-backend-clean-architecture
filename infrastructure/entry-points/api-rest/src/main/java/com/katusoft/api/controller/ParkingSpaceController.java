@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/parking-space")
+@RequestMapping("api/v1/parking-space")
 public class ParkingSpaceController {
 
   private final CreateParkingSpaceUseCase createParkingSpaceUseCase;
@@ -43,7 +43,7 @@ public class ParkingSpaceController {
     return ResponseEntity.ok(new ParkingSpaceResponse(parkingSpace));
   }
 
-  @GetMapping("/get-all")
+  @GetMapping()
   public ResponseEntity<List<ParkingSpaceResponse>> getParkingSpaces(){
 
     List<ParkingSpace> parkingSpaces = getAllParkingSpacesUseCase.execute();

@@ -5,9 +5,12 @@ import com.katusoft.jpa.helper.AdapterOperations;
 import com.katusoft.jpa.mapper.RegisterMapper;
 import com.katusoft.model.register.Register;
 import com.katusoft.model.register.gateways.RegisterRepository;
+import com.katusoft.model.valueobjects.LicensePlate;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,6 +28,15 @@ public class JpaRegisterRepositoryAdapter extends AdapterOperations<Register, Re
      */
     super(repository, mapper, d -> mapper.map(d, Register.class));
     this.registerMapper = registerMapper;
+  }
+
+  @Override
+  public List<Register> findAll(){
+    List<RegisterEntity> registers = (List<RegisterEntity>) repository.findAll();
+
+    return registers.stream()
+        .map(registerMapper::toDomain)
+        .toList();
   }
 
   @Override

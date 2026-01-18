@@ -50,7 +50,8 @@ public class JpaUserRepositoryAdapter extends AdapterOperations<User, UserEntity
 
   @Override
   public User save(User user) {
-    return save(user);
+    repository.save(userMapper.toEntity(user));
+    return user;
   }
 
   @Override
